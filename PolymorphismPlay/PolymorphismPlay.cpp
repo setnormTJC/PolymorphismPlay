@@ -1,0 +1,58 @@
+// PolymorphismPlay.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include"Animal.h"
+#include <vector>
+
+void firstDemoOfPolymorphism()
+{
+	Zoo::AnimalInterface animal;
+	animal.makeSound();
+
+	Zoo::Loon loon;
+	loon.makeSound();
+	std::cout << "Any key to continue\n";
+	std::cin.get();
+
+	Zoo::Cat cat;
+	cat.makeSound();
+	std::cout << "Any key to continue\n";
+	std::cin.get();
+
+
+	Zoo::Fox fox;
+	fox.makeSound();
+
+}
+
+void secondDemoOfPolymorphism()
+{
+	std::vector<Zoo::AnimalInterface> zooAnimals(4); //the 4 means reserve space for 4 animals
+
+	//create the animals to put in the list: 
+	Zoo::AnimalInterface animal;
+	Zoo::Loon loon;
+	Zoo::Cat cat;
+	Zoo::Fox fox;
+
+	zooAnimals = { animal, loon, cat, fox };
+
+	//now loop and call the "appropriate"? makeSound function: 
+	for (auto& currentAnimal : zooAnimals)
+	{
+		//currentAnimal.//no members appearing if using for (const auto& ...) -> need const on `makeSound`!
+		currentAnimal.makeSound(); 
+	}
+
+}
+
+int main()
+{
+	//std::vector<Zoo::AnimalInterface> zooAnimals; //a nice way to do it!
+	
+	//firstDemoOfPolymorphism(); 
+
+	secondDemoOfPolymorphism(); //not the expected result! 
+
+}
+
